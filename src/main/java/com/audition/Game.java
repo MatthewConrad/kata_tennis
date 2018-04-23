@@ -8,6 +8,8 @@ package com.audition;
  *   two more times than their opponent
  * - If both players have 40 points, the game is in "deuce". The winner of the next point will have "advantage"
  *   and must score another point in a row to win, but if the other player scores instead the game is back to deuce.
+ *
+ * ADDITIONAL FEATURE FROM MATTHEW: when score is tied before deuce, it's announced as "[score] all"
  **/
 
 public class Game {
@@ -22,8 +24,12 @@ public class Game {
 
     public String getScore(){
         String score;
-        if(player1.getScore() == player2.getScore() && player1.getScore() >= 3){
-            score = "deuce";
+        if(player1.getScore() == player2.getScore()){
+            if( player1.getScore() >= 3){
+                score = "deuce";
+            }else{
+                score = player1.getScoreDescription() + " all";
+            }
         }else if(player1.getScore() > 3 || player2.getScore() > 3){
             Player leadPlayer = (player1.getScore() > player2.getScore()) ? player1 : player2;
             if (Math.abs(player1.getScore() - player2.getScore()) >= 2){

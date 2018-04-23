@@ -8,6 +8,8 @@ package com.audition;
  *   two more times than their opponent
  * - If both players have 40 points, the game is in "deuce". The winner of the next point will have "advantage"
  *   and must score another point in a row to win, but if the other player scores instead the game is back to deuce.
+ *
+ * ADDITIONAL FEATURE FROM MATTHEW: when score is tied before deuce, it's announced as "[score] all"
  **/
 
 public class Player {

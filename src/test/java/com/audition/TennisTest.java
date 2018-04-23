@@ -13,6 +13,8 @@ import static org.junit.Assert.*;
  *   two more times than their opponent
  * - If both players have 40 points, the game is in "deuce". The winner of the next point will have "advantage"
  *   and must score another point in a row to win, but if the other player scores instead the game is back to deuce.
+ *
+ * ADDITIONAL FEATURE FROM MATTHEW: when score is tied before deuce, it's announced as "[score] all"
  **/
 
 public class TennisTest {
@@ -28,8 +30,8 @@ public class TennisTest {
     }
 
     @Test
-    public void initialScoreDescriptionShouldBeLove(){
-        assertEquals("love, love", game.getScore());
+    public void initialScoreDescriptionShouldBeLoveAll(){
+        assertEquals("love all", game.getScore());
     }
 
     @Test
@@ -57,6 +59,20 @@ public class TennisTest {
         }
 
         assertEquals("forty, love", game.getScore());
+    }
+
+    @Test
+    public void tiedPointsBelowDeuceShouldBeScoreAll(){
+        // love all tested earlier; 40-40 is covered by deuce
+
+        player1.scorePoint();
+        player2.scorePoint();
+        assertEquals("fifteen all", game.getScore());
+
+        player1.scorePoint();
+        player2.scorePoint();
+        assertEquals("thirty all", game.getScore());
+
     }
 
     @Test
