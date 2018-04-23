@@ -39,7 +39,7 @@ public class Player {
             case 2:
                 description = "thirty";
                 break;
-            case 4:
+            case 3:
                 description = "forty";
                 break;
             default:
