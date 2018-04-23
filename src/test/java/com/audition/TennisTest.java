@@ -29,14 +29,14 @@ public class TennisTest {
 
     @Test
     public void initialScoreDescriptionShouldBeLove(){
-        assertEquals(game.getScore(), "love, love");
+        assertEquals("love, love", game.getScore());
     }
 
     @Test
     public void onePointScoreDescriptionShouldBeFifteen(){
         player1.scorePoint();
 
-        assertEquals(game.getScore(), "fifteen, love");
+        assertEquals("fifteen, love", game.getScore());
     }
 
     @Test
@@ -46,7 +46,7 @@ public class TennisTest {
             player1.scorePoint();
         }
 
-        assertEquals(game.getScore(), "thirty, love");
+        assertEquals("thirty, love", game.getScore());
     }
 
     @Test
@@ -56,23 +56,23 @@ public class TennisTest {
             player1.scorePoint();
         }
 
-        assertEquals(game.getScore(), "forty, love");
+        assertEquals("forty, love", game.getScore());
     }
 
     @Test
     public void playersShouldScorePointsIndependently(){
         player1.scorePoint();
-        assertEquals(game.getScore(), "fifteen, love");
+        assertEquals("fifteen, love", game.getScore());
 
         player1.scorePoint();
-        assertEquals(game.getScore(), "thirty, love");
+        assertEquals("thirty, love", game.getScore());
 
         player2.scorePoint();
-        assertEquals(game.getScore(), "thirty, fifteen");
+        assertEquals("thirty, fifteen", game.getScore());
 
         player2.scorePoint();
         player2.scorePoint();
-        assertEquals(game.getScore(), "thirty, forty");
+        assertEquals("thirty, forty", game.getScore());
     }
 
     @Test
@@ -82,7 +82,7 @@ public class TennisTest {
             player1.scorePoint();
         }
 
-        assertEquals(game.getScore(), "PlayerOne wins");
+        assertEquals("PlayerOne wins", game.getScore());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class TennisTest {
         player1.scorePoint();
         player1.scorePoint();
 
-        assertEquals(game.getScore(), "PlayerOne wins");
+        assertEquals("PlayerOne wins", game.getScore());
     }
 
     @Test
@@ -107,7 +107,7 @@ public class TennisTest {
             player2.scorePoint();
         }
 
-        assertEquals(game.getScore(), "deuce");
+        assertEquals("deuce", game.getScore());
     }
 
     @Test
@@ -118,7 +118,10 @@ public class TennisTest {
             player2.scorePoint();
         }
 
-        assertEquals(game.getScore(), "deuce");
+        assertEquals("deuce", game.getScore());
+
+        player1.scorePoint();
+        assertEquals("advantage PlayerOne", game.getScore());
     }
 
     @Test
@@ -130,9 +133,9 @@ public class TennisTest {
         }
         player1.scorePoint();
 
-        assertEquals(game.getScore(), "advantage PlayerOne");
+        assertEquals("advantage PlayerOne", game.getScore());
         player2.scorePoint();
-        assertEquals(game.getScore(),"deuce");
+        assertEquals("deuce", game.getScore());
     }
 
     @Test
@@ -144,8 +147,44 @@ public class TennisTest {
         }
         player1.scorePoint();
 
-        assertEquals(game.getScore(), "advantage PlayerOne");
+        assertEquals("advantage PlayerOne", game.getScore());
         player1.scorePoint();
-        assertEquals(game.getScore(),"PlayerOne wins");
+        assertEquals("PlayerOne wins", game.getScore());
     }
+
+    @Test
+    public void playerTwoCanGetAdvantage(){
+        int x = 0;
+        for(x = 0; x < 3; x++) {
+            player1.scorePoint();
+            player2.scorePoint();
+        }
+
+        player2.scorePoint();
+        assertEquals("advantage PlayerTwo", game.getScore());
+    }
+
+    @Test
+    public void playerTwoCanWinFromAdvantage() {
+        int x = 0;
+        for(x = 0; x < 3; x++) {
+            player1.scorePoint();
+            player2.scorePoint();
+        }
+
+        player2.scorePoint();
+        player2.scorePoint();
+        assertEquals("PlayerTwo wins", game.getScore());
+    }
+
+    @Test
+    public void playerTwoCanWin(){
+        int x = 0;
+        for(x = 0; x < 4; x++) {
+            player2.scorePoint();
+        }
+
+        assertEquals("PlayerTwo wins", game.getScore());
+    }
+
 }
